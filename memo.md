@@ -95,3 +95,9 @@ const priceLabel = computed(() => {
 ```ツイートが0以下の場合のみpタグを表示
 <p v-if="tweets.length <= 0">No tweets have been added.</p>
 ```
+
+- コンポーネント間のデータの受け渡し
+  - 親から子
+    Props（defineProps）
+  - 子から親
+    Emit（defineEmits）
