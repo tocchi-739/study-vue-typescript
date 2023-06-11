@@ -24,3 +24,64 @@
 ```
 <button v-on:click="buy">buy</button>
 ```
+
+- ref
+
+リアクティブにする方法１
+
+再レンダリングさせることができる（厳密には違うかもしれないが、、）
+
+ref に代入する場合は　変数名.value とする必要がある（ref はオブジェクトである）
+
+```
+
+import { ref } from "vue";
+
+let item1 = ref({ name: "Desk", price: 300 });
+
+const input = (e: any) => {
+  item1.value.name = e.target.value;
+};
+```
+
+- reactive
+
+リアクティブにする方法２
+
+オブジェクト全体をリアクティブにしたい場合
+
+```
+import { reactive } from "vue";
+
+
+const item1 = reactive({ name: "Desk", price: 300 });
+
+const input = (e: any) => {
+  item1.name = e.target.value;
+};
+
+```
+
+- v-model
+
+input をすっきり描くことができる
+
+関数を定義せずに、input の値を取得することができる
+
+- computed
+
+変数の値を条件に応じて分岐させたい場合などに使用
+
+computed を使わなくても表現できるが、パフォーマンス的には computed を使った方が良い（推奨されている）
+
+```
+import { computed } from "vue";
+
+const priceLabel = computed(() => {
+  if (item1.price > budget) {
+    return "予算オーバー";
+  } else {
+    return item1.price + "円";
+  }
+});
+```

@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const item1 = { name: "Desk", price: 300 };
+import { reactive, computed } from "vue";
+
+const item1 = reactive({ name: "Desk", price: 300 });
 const item2 = { name: "Bike", price: 500 };
 
 const url = "https://www.yahoo.co.jp";
@@ -7,14 +9,32 @@ const url = "https://www.yahoo.co.jp";
 const buy = (itemName: string) => {
   alert(itemName + "を購入しますか？");
 };
+
+const clear = () => {
+  item1.name = "";
+  item1.price = 0;
+};
+
+const budget = 50000;
+
+const priceLabel = computed(() => {
+  if (item1.price > budget) {
+    return "予算オーバー";
+  } else {
+    return item1.price + "円";
+  }
+});
 </script>
 
 <template>
   <div class="container">
-    <h1>最近の支出</h1>
+    <h1>Payment</h1>
+    <input v-model="item1.name" />
+    <input v-model="item1.price" />
+    <button v-on:click="clear">clear</button>
     <div class="payment">
       <label>{{ item1.name }}</label>
-      <label>{{ item1.price }}円</label>
+      <label>{{ priceLabel }}</label>
       <a v-bind:href="url">bought at...</a>
       <button v-on:click="buy(item1.name)">buy</button>
     </div>
