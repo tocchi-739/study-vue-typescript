@@ -85,3 +85,13 @@ const priceLabel = computed(() => {
   }
 });
 ```
+
+- v-if
+
+条件付きで html 要素をレンダリングすることができる
+
+似たものに v-show がある
+
+```ツイートが0以下の場合のみpタグを表示
+<p v-if="tweets.length <= 0">No tweets have been added.</p>
+```
